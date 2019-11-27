@@ -1,0 +1,55 @@
+version: '3'
+services:
+  config-server:
+    build: ./centralized-configuration-service
+    image: centralized-configuration-service
+    ports:
+      - "8888:8888"
+    networks:
+      - microservices
+  service-eureka-server:
+    build: ./eurekaserver
+    image: eurekaserver
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices
+  service-student:
+    build: ./StudentService
+    image: student
+    ports:
+      - "8801:8801"
+    networks:
+      - microservices
+  service-family:
+    build: ./family
+    image: family
+    ports:
+      - "8802:8802"
+    networks:
+      - microservices
+  service-course:
+    build: ./course
+    image: course
+    ports:
+      - "8804:8804"
+    networks:
+      - microservices
+  service-teacher:
+    build: ./teacher
+    image: teacher
+    ports:
+      - "8803:8803"
+    networks:
+      - microservices
+  apigateway:
+    build: ./apigateway
+    image: apigateway
+    ports:
+      - "8088:8088"
+    networks:
+      - microservices
+
+networks:
+  microservices:
+
